@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block titulo %}Fazer Pedido – Marmitaria{% endblock %}
+
+{% block conteudo %}
+<section class="card" aria-labelledby="titulo-form">
+  <h2 id="titulo-form">Novo Pedido</h2>
+  <p class="subtitulo">Escolha o tamanho da marmita e informe o nome do cliente.</p>
+
+  {% if request.args.get('erro') %}
+    <div class="alerta-erro" role="alert">
+      ⚠️ Por favor, preencha todos os campos antes de enviar.
+    </div>
+  {% endif %}
+
+  <form action="{{ url_for('cadastrar') }}" method="POST"
+        id="form-pedido" novalidate>
+
+    <div class="campo">
+      <label for="cliente">Nome do cliente <span aria-hidden="true">*</span></label>
+      <input type="text" id="cliente" name="cliente"
+             placeholder="Ex.: João da Silva"
+             required autocomplete="name"
+             aria-required="true" />
+      <small class="dica">Campo obrigatório</small>
+    </div>
+
+    <fieldset class="campo">
+      <legend>Tamanho da marmita <span aria-hidden="true">*</span></legend>
+
+      <div class="opcoes-tamanho">
+        <label class="opcao">
+          <input type="radio" name="tamanho" value="Pequena" required />
+          <span class="icone">🍽️</span>
+          <span class="nome">Pequena</span>
+          <span class="preco">R$ 15,00</span>
+        </label>
+
+        <label class="opcao">
+          <input type="radio" name="tamanho" value="Média" required />
+          <span class="icone">🍛</span>
+          <span class="nome">Média</span>
+          <span class="preco">R$ 20,00</span>
+        </label>
+
+        <label class="opcao">
+          <input type="radio" name="tamanho" value="Grande" required />
+          <span class="icone">🍱</span>
+          <span class="nome">Grande</span>
+          <span class="preco">R$ 25,00</span>
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="acoes">
+      <button type="submit" class="btn btn-primario">Cadastrar Pedido</button>
+      <a href="{{ url_for('listar_pedidos') }}" class="btn btn-secundario">
+        Ver pedidos cadastrados
+      </a>
+    </div>
+  </form>
+</section>
+{% endblock %}s

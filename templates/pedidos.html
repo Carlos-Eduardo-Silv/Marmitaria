@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block titulo %}Pedidos Cadastrados – Marmitaria{% endblock %}
+
+{% block conteudo %}
+<section class="card" aria-labelledby="titulo-lista">
+  <div class="cabecalho-lista">
+    <h2 id="titulo-lista">Pedidos Cadastrados</h2>
+    <a href="{{ url_for('inicio') }}" class="btn btn-primario">+ Novo Pedido</a>
+  </div>
+
+  {% if pedidos %}
+    <table class="tabela" aria-describedby="desc-tabela">
+      <caption id="desc-tabela" class="sr-only">
+        Lista de pedidos registrados no sistema
+      </caption>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Cliente</th>
+          <th scope="col">Tamanho</th>
+          <th scope="col">Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in pedidos %}
+          <tr>
+            <td>{{ p[0] }}</td>
+            <td>{{ p[1] }}</td>
+            <td>
+              <span class="badge badge-{{ p[2]|lower }}">{{ p[2] }}</span>
+            </td>
+            <td>{{ p[3] }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="vazio">Nenhum pedido cadastrado ainda. 🍽️</p>
+  {% endif %}
+
+  <p class="api-info">
+    🔗 API disponível em
+    <a href="{{ url_for('api_pedidos') }}" target="_blank" rel="noopener">
+      /api/pedidos
+    </a>
+  </p>
+</section>
+{% endblock %}

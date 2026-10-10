@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block titulo %}Marmitaria Popular{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <a href="#conteudo" class="pular-conteudo">Pular para o conteúdo principal</a>
+
+  <header class="cabecalho">
+    <div class="container">
+      <h1 class="logo">🍱 Marmitaria Popular</h1>
+      <nav aria-label="Menu principal">
+        <ul class="menu">
+          <li><a href="{{ url_for('inicio') }}">Fazer Pedido</a></li>
+          <li><a href="{{ url_for('listar_pedidos') }}">Ver Pedidos</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container">
+    {% block conteudo %}{% endblock %}
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>Projeto Integrador – UNIVESP 2026 · Software de Gerenciamento de Marmitaria</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
