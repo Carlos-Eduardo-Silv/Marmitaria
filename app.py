@@ -47,6 +47,7 @@ def api_pedidos():
     conn.close()
     return jsonify([{"id": r[0], "cliente": r[1], "tamanho": r[2]} for r in rows])
 
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)
